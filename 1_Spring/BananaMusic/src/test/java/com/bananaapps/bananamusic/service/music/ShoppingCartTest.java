@@ -1,6 +1,7 @@
 package com.bananaapps.bananamusic.service.music;
 
 import com.bananaapps.bananamusic.domain.music.PurchaseOrderLineSong;
+import com.bananaapps.bananamusic.domain.music.Song;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -41,7 +42,8 @@ class ShoppingCartTest {
         Random rand = new Random();
 
         for (int i = 0; i < numProducts; i++) {
-            cart.addItem(new PurchaseOrderLineSong(1L, null, 2, rand.nextDouble() * 100));
+            Song song= new Song();
+            cart.addItem(new PurchaseOrderLineSong(song, 2, rand.nextDouble() * 100));
         }
 
         cart.empty();
@@ -68,8 +70,9 @@ class ShoppingCartTest {
 
         // when
         for (int i = 0; i < numProducts; i++) {
+            Song song = new Song();
             double precio = rand.nextDouble() * 100;
-            cart.addItem(new PurchaseOrderLineSong(1L, null, 1, precio));
+            cart.addItem(new PurchaseOrderLineSong(song, 1, precio));
 
             inc += precio;
         }
@@ -100,7 +103,8 @@ class ShoppingCartTest {
         Random rand = new Random();
 
         for (int i = 0; i < 3; i++) {
-            cart.addItem(new PurchaseOrderLineSong(1L, null, 2, rand.nextDouble() * 100));
+            Song song = new Song();
+            cart.addItem(new PurchaseOrderLineSong(song, 2, rand.nextDouble() * 100));
         }
 
         cart.buy();

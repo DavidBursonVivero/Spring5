@@ -38,14 +38,18 @@ class PurchaseOrderRepositoryTest {
     @Test
     void given_existingOrder_WHEN_save_Then_OK() {
 
-        List<PurchaseOrderLineSong> lines = List.of(
-                new PurchaseOrderLineSong(null, new Song(1l), 1, 10.0)
-        );
+        Song song = new Song(1l);
+        PurchaseOrderLineSong line = new PurchaseOrderLineSong(song, 1, 10.0);
+        List<PurchaseOrderLineSong> lines = List.of(line);
+
+        /*List<PurchaseOrderLineSong> lines = List.of(
+                new PurchaseOrderLineSong(null, new Song(1l), 1, 10.0 )
+        );*/
 
         PurchaseOrder order = new PurchaseOrder(null, 1, true, LocalDate.now(), new User(1), lines);
 
         // TODO: uncomment when relations set
-        /*for (PurchaseOrderLineSong line : lines) {
+       /* for (PurchaseOrderLineSong line : lines) {
             line.setOrder(order);
         }*/
 

@@ -3,6 +3,7 @@ package com.bananaapps.bananamusic.domain.music;
 import com.bananaapps.bananamusic.domain.user.User;
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,12 +12,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
+@Entity
 public class PurchaseOrder {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int status;
     private boolean valid;
     private LocalDate orderDate;
     private User user;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="purchaseOrder")
     private List<PurchaseOrderLineSong> lineSongs;
 
 
@@ -41,4 +49,6 @@ public class PurchaseOrder {
         this.user = user;
         this.lineSongs = lineSongs;
     }
+
+
 }
