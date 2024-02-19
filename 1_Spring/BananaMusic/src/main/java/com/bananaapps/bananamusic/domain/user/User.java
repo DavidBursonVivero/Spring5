@@ -9,7 +9,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@Entity
+
+@Table(name = "user",
+             uniqueConstraints= {
+                @UniqueConstraint(columnNames = "email")
+             })
+
 public class User {
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String email;

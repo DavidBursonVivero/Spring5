@@ -12,19 +12,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
 @Entity
 public class PurchaseOrder {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int status;
     private boolean valid;
     private LocalDate orderDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="purchaseOrder")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchaseOrderLineSong> lineSongs;
 
 
@@ -49,6 +50,4 @@ public class PurchaseOrder {
         this.user = user;
         this.lineSongs = lineSongs;
     }
-
-
 }

@@ -9,6 +9,7 @@ import com.bananaapps.bananamusic.persistence.UserRepository;
 import com.bananaapps.bananamusic.persistence.music.PurchaseOrderRepository;
 import com.bananaapps.bananamusic.persistence.music.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class ShoppingCartImpl implements ShoppingCart {
     private ArrayList<PurchaseOrderLineSong> items;
 
     @Autowired
+    @Qualifier("jpaPurchaseOrderRepository")
     private PurchaseOrderRepository orderRepo;
 
     @Autowired

@@ -1,11 +1,17 @@
 package com.bananaapps.bananamusic.service.music;
 
+import com.bananaapps.bananamusic.config.SpringConfig;
 import com.bananaapps.bananamusic.domain.music.PurchaseOrderLineSong;
 import com.bananaapps.bananamusic.domain.music.Song;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Random;
 
@@ -14,7 +20,10 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {SpringConfig.class})
+@EnableAutoConfiguration
+@ActiveProfiles({"dev"})
 class ShoppingCartTest {
 
     @Autowired
@@ -104,7 +113,7 @@ class ShoppingCartTest {
 
         for (int i = 0; i < 3; i++) {
             Song song = new Song();
-            cart.addItem(new PurchaseOrderLineSong(song, 2, rand.nextDouble() * 100));
+            cart.addItem(new PurchaseOrderLineSong(1l, null, null, 2, rand.nextDouble() * 100));
         }
 
         cart.buy();

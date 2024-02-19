@@ -2,10 +2,7 @@ package com.bananaapps.bananamusic.domain.music;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -14,22 +11,23 @@ import javax.persistence.ManyToOne;
 @ToString
 @Entity
 public class PurchaseOrderLineSong {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lineNumber;
+
+    @ManyToOne()
+    @JoinColumn(name = "orderId")
+    private PurchaseOrder order;
+
+    @OneToOne
+    @JoinColumn(name = "songId")
     private Song song;
     private Integer quantity;
     private Double unitPrice;
 
-    @ManyToOne
-    @JoinColumn(name="purchaseorder_id")
-    private PurchaseOrder purchaseOrder;
+    public PurchaseOrderLineSong(Song song, int i, double v) {
+    }
 
-    public PurchaseOrderLineSong(Song song, Integer quantity, Double unitPrice) {
-    this.song = song;
-    this.quantity = quantity;
-    this.unitPrice = unitPrice;
-}
-
-    public void setOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
+    public PurchaseOrderLineSong(long l, Object o, Object o1, double v) {
     }
 }

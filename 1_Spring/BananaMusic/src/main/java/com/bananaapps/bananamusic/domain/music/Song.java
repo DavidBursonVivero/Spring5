@@ -20,6 +20,7 @@ import java.util.Objects;
 
 @Entity
 public class Song {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,13 +28,11 @@ public class Song {
     private LocalDate releaseDate;
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name = "songcategory_id")
     private SongCategory songCategory;
 
     private int version;
 
-    @OneToMany(mappedBy = "song")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Backlog> backlogRecords = new ArrayList<Backlog>();
 
     public void addBacklogRecord(String location, int quantity) {
@@ -43,7 +42,7 @@ public class Song {
         iv.setItem(this);
     }
 
-//    @Transient
+   @Transient
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Song(Long id) {
